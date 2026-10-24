@@ -9,3 +9,6 @@ __pycache__/
 .pytest_cache/
 private/
 *.log
+*service_account*.json
+*credentials*.json
+*sa*.json
