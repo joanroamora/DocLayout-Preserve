@@ -19,7 +19,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | :--- | :--- | :--- | :--- |
 | **Fase 0** | `main` | Especificación técnica, gobernanza y repositorio base | `[x] Completado` |
 | **Feature 1** | `Feature1EntornoYScaffolding` | Aislamiento `.venv`, estructura modular, tooling y contratos de datos | `[x] Completado` |
-| **Feature 2** | `Feature2IngestaYParsingLayout` | Motor de parsing y extracción de Bounding Boxes (PDF/DOCX) | `[ ] Pendiente` |
+| **Feature 2** | `Feature2IngestaYParsingLayout` | Motor de parsing y extracción de Bounding Boxes (PDF/DOCX) | `[x] Completado` |
 | **Feature 3** | `Feature3IntegracionGeminiIA` | Cliente `google-genai`, esquemas estructurados y mock testing | `[ ] Pendiente` |
 | **Feature 4** | `Feature4MotorReconstruccionYFitting` | Algoritmo de text-fitting adaptativo y renderizado de salida | `[ ] Pendiente` |
 | **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[ ] Pendiente` |
@@ -63,14 +63,14 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 **Rama**: `Feature2IngestaYParsingLayout`  
 **Objetivo**: Extraer la estructura visual completa de PDFs y DOCX sin pérdida geométrica.
 
-- [ ] Implementación de `PDFLayoutExtractor` en `src/doclayout/ingestion/pdf.py` usando `PyMuPDF` (`fitz`) y `pdfplumber`.
+- [x] Implementación de `PDFLayoutExtractor` en `src/doclayout/ingestion/pdf.py` usando `PyMuPDF` (`fitz`) y `pdfplumber`.
   - Extracción de bloques de texto con coordenadas espaciales exactas `(x0, y0, x1, y1)`.
   - Detección de propiedades tipográficas: fuente, tamaño en puntos, color RGBA e interlineado.
   - Identificación de bloques estructurales: Encabezados, Párrafos, Tablas, Listas e Imágenes.
-- [ ] Implementación de `DocxLayoutExtractor` en `src/doclayout/ingestion/docx.py` para soporte nativo de Word.
-- [ ] Soporte para extracción de celdas y filas en tablas preservando anchos de columna relativos.
-- [ ] Manejo de PDFs protegidos, vacíos o corruptos con excepciones controladas y mensajes comprensibles.
-- [ ] Pruebas unitarias con documentos muestra en `tests/unit/test_ingestion.py`.
+- [x] Implementación de `DocxLayoutExtractor` en `src/doclayout/ingestion/docx.py` para soporte nativo de Word.
+- [x] Soporte para extracción de celdas y filas en tablas preservando anchos de columna relativos.
+- [x] Manejo de PDFs protegidos, vacíos o corruptos con excepciones controladas y mensajes comprensibles.
+- [x] Pruebas unitarias con documentos muestra en `tests/unit/test_ingestion.py`.
 
 ---
 
@@ -230,3 +230,4 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | :--- | :--- | :--- | :--- |
 | 23/10/2026 | **Fase 0** | Antigravity AI / Joan Roa | Repositorio vinculado a remoto, especificación técnica en `project.md` y creación del cronograma `stages.md`. |
 | 23/10/2026 | **Feature 1** | Antigravity AI / Joan Roa | Rama `Feature1EntornoYScaffolding`: entorno `.venv`, cachés locales, modelos Pydantic, configuración de tooling y tests unitarios. |
+| 23/10/2026 | **Feature 2** | Antigravity AI / Joan Roa | Rama `Feature2IngestaYParsingLayout`: motores `PDFLayoutExtractor` y `DocxLayoutExtractor`, soporte de tablas, validaciones y tests unitarios. |
