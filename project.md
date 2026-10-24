@@ -297,10 +297,12 @@ DocLayout-Preserve/
 - **Pipeline de Terraform en CI**:
   - Los Pull Requests ejecutan únicamente `terraform fmt -check`, `terraform validate` y `terraform plan` con fines de revisión y análisis de seguridad (`tfsec`/`checkov`).
   - Prohibido ejecutar `terraform apply` o `destroy` desde ramas de características o Pull Requests no aprobados. El `apply` solo se ejecuta en la rama troncal con aprobación previa.
-- **Detección de Drift y Control de Costos**:
+- **Detección de Drift, Control de Costos y Política de Destrucción Total (Cero Recursos / Cero Tokens)**:
   - Tareas programadas periódicas de detección de desvíos (*drift detection*).
   - Etiquetas (*tags*) obligatorias en todos los recursos: `Project = DocLayout-Preserve`, `Environment`, `ManagedBy = Terraform`, `CostCenter`.
-  - Alertas presupuestarias configuradas en la cuenta del proveedor cloud antes de aprovisionar infraestructura activa.
+  - Alertas presupuestarias configuradas en la cuenta de GCP antes de aprovisionar infraestructura activa.
+  - **Regla Mandatoria de Teardown Total (Costo Cero / Tokens Cero)**: El comando o workflow de `destroy` debe desaprovisionar y purgar absolutamente todos los recursos creados en Google Cloud Platform (GKE, VPC, subredes, balanceadores, discos persistentes, IPs estáticas, secretos y buckets de Cloud Storage —forzando el vaciado previo de objetos y versiones—).
+  - La destrucción debe garantizar que no queden recursos residuales o huérfanos facturando y que el consumo de tokens y llamadas a Gemini API quede **estrictamente en CERO (0)**.
 
 ---
 
@@ -353,6 +355,7 @@ Para considerar completada y validada cualquier entrega del proyecto, se deben c
 6. **Manejo Seguro de la API**: Las pruebas automatizadas utilizan mocks de Gemini sin consumir cuotas de API. En producción, las claves se inyectan mediante gestores de secretos y nunca se imprimen en logs ni pantallas.
 7. **Alta Disponibilidad y Autoscaling**: Múltiples réplicas de workers procesan documentos asíncronamente desde la cola sin duplicar trabajos ni mezclar sesiones de usuarios. El HPA escala adecuadamente ante incrementos de carga.
 8. **Observabilidad Operativa**: Los dashboards de Grafana muestran en tiempo real la salud de la aplicación, estado de la cola y métricas de procesamiento; una falla simulada dispara la alerta correspondiente.
+9. **Garantía de Destrucción Total y Costo Cero**: El ciclo de vida de infraestructura cuenta con un proceso de desaprovisionamiento (`destroy`) formalmente probado y verificado que elimina el 100% de los recursos en GCP (compute, redes, almacenamiento, balanceadores e IPs) y detiene de inmediato cualquier tráfico o consumo de tokens en Gemini API, garantizando que el costo recurrente quede estrictamente en cero ($0 / 0 tokens).
 
 ---
 

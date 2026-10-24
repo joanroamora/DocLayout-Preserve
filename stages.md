@@ -187,7 +187,8 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 - [ ] Configuración de backend remoto con cifrado y bloqueo de estado (*state locking*).
 - [ ] Fijación estricta de versiones de proveedores en `.terraform.lock.hcl`.
 - [ ] Workflow en GitHub Actions para `terraform fmt`, `tflint`, escaneo con `tfsec`/`checkov` y generación de `terraform plan`.
-- [ ] Definición de etiquetas obligatorias para control y alertas de presupuesto en la nube.
+- [ ] Definición de etiquetas obligatorias para control y alertas de presupuesto en GCP.
+- [ ] Implementación y prueba de teardown total (`terraform destroy` con vaciado previo de buckets de Cloud Storage) que garantice el apagado total de infraestructura y cero consumo residual de tokens en GCP ($0 / 0 tokens).
 
 ---
 
