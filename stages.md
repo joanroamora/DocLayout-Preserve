@@ -21,7 +21,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | **Feature 1** | `Feature1EntornoYScaffolding` | Aislamiento `.venv`, estructura modular, tooling y contratos de datos | `[x] Completado` |
 | **Feature 2** | `Feature2IngestaYParsingLayout` | Motor de parsing y extracción de Bounding Boxes (PDF/DOCX) | `[x] Completado` |
 | **Feature 3** | `Feature3IntegracionGeminiIA` | Cliente `google-genai`, esquemas estructurados y mock testing | `[x] Completado` |
-| **Feature 4** | `Feature4MotorReconstruccionYFitting` | Algoritmo de text-fitting adaptativo y renderizado de salida | `[ ] Pendiente` |
+| **Feature 4** | `Feature4MotorReconstruccionYFitting` | Algoritmo de text-fitting adaptativo y renderizado de salida | `[x] Completado` |
 | **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[ ] Pendiente` |
 | **Feature 6** | `Feature6InterfazStreamlitComparativa` | UI con vista lado a lado, capas de bounding boxes e historial | `[ ] Pendiente` |
 | **Feature 7** | `Feature7PipelineCICDSeguridad` | GitHub Actions (validación de ramas, tests con mocks, SAST, Trivy) | `[ ] Pendiente` |
@@ -94,17 +94,17 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 **Rama**: `Feature4MotorReconstruccionYFitting`  
 **Objetivo**: Renderizar el documento transformado encajando el texto en la geometría original.
 
-- [ ] Implementación de algoritmo de ajuste adaptativo (*Adaptive Text-Fitting*) en `src/doclayout/reconstruction/fitting.py`:
+- [x] Implementación de algoritmo de ajuste adaptativo (*Adaptive Text-Fitting*) en `src/doclayout/reconstruction/fitting.py`:
   - Cálculo de ancho y alto requerido para el texto transformado según la fuente y tamaño base.
   - Ajuste 1: Micro-tracking (espaciado entre caracteres sutil).
   - Ajuste 2: Escalado tipográfico proporcional controlado (umbral mínimo del 75% del tamaño original).
   - Ajuste 3: Ajuste proporcional de interlineado.
   - Emisión de alertas de desbordamiento si el texto supera la capacidad física del contenedor.
-- [ ] Renderizador PDF en `src/doclayout/reconstruction/pdf_builder.py`:
+- [x] Renderizador PDF en `src/doclayout/reconstruction/pdf_builder.py`:
   - Reemplazo y maquetación de bloques de texto sobre la geometría original.
   - Preservación exacta de imágenes, bordes de tabla, logotipos y elementos vectoriales.
-- [ ] Generador de documentos Word en `src/doclayout/reconstruction/docx_builder.py`.
-- [ ] Pruebas de renderizado y ajuste tipográfico en `tests/unit/test_reconstruction.py`.
+- [x] Generador de documentos Word en `src/doclayout/reconstruction/docx_builder.py`.
+- [x] Pruebas de renderizado y ajuste tipográfico en `tests/unit/test_reconstruction.py`.
 
 ---
 
@@ -232,3 +232,4 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | 23/10/2026 | **Feature 1** | Antigravity AI / Joan Roa | Rama `Feature1EntornoYScaffolding`: entorno `.venv`, cachés locales, modelos Pydantic, configuración de tooling y tests unitarios. |
 | 23/10/2026 | **Feature 2** | Antigravity AI / Joan Roa | Rama `Feature2IngestaYParsingLayout`: motores `PDFLayoutExtractor` y `DocxLayoutExtractor`, soporte de tablas, validaciones y tests unitarios. |
 | 24/10/2026 | **Feature 3** | Antigravity AI / Joan Roa | Rama `Feature3IntegracionGeminiIA`: `GeminiClient` con `google-genai`, prompts anti-inyección, Structured Outputs, backoff con jitter y `MockGeminiClient`. |
+| 25/10/2026 | **Feature 4** | Antigravity AI / Joan Roa | Rama `Feature4MotorReconstruccionYFitting`: `AdaptiveTextFitter`, `PDFDocumentBuilder` (overlay + standalone), `DocxDocumentBuilder` y tests unitarios. |
