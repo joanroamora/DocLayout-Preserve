@@ -20,7 +20,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | **Fase 0** | `main` | Especificación técnica, gobernanza y repositorio base | `[x] Completado` |
 | **Feature 1** | `Feature1EntornoYScaffolding` | Aislamiento `.venv`, estructura modular, tooling y contratos de datos | `[x] Completado` |
 | **Feature 2** | `Feature2IngestaYParsingLayout` | Motor de parsing y extracción de Bounding Boxes (PDF/DOCX) | `[x] Completado` |
-| **Feature 3** | `Feature3IntegracionGeminiIA` | Cliente `google-genai`, esquemas estructurados y mock testing | `[ ] Pendiente` |
+| **Feature 3** | `Feature3IntegracionGeminiIA` | Cliente `google-genai`, esquemas estructurados y mock testing | `[x] Completado` |
 | **Feature 4** | `Feature4MotorReconstruccionYFitting` | Algoritmo de text-fitting adaptativo y renderizado de salida | `[ ] Pendiente` |
 | **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[ ] Pendiente` |
 | **Feature 6** | `Feature6InterfazStreamlitComparativa` | UI con vista lado a lado, capas de bounding boxes e historial | `[ ] Pendiente` |
@@ -78,15 +78,15 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 **Rama**: `Feature3IntegracionGeminiIA`  
 **Objetivo**: Conectar con Gemini Developer API mediante el SDK oficial y transformar texto preservando restricciones espaciales.
 
-- [ ] Implementación del cliente `GeminiClient` en `src/doclayout/llm/client.py` usando `google-genai`.
-- [ ] Configuración segura mediante `GEMINI_API_KEY` y `GEMINI_MODEL` (con `.env.example`).
-- [ ] Diseño de prompts estructurados en `src/doclayout/llm/prompts.py`:
+- [x] Implementación del cliente `GeminiClient` en `src/doclayout/llm/client.py` usando `google-genai`.
+- [x] Configuración segura mediante `GEMINI_API_KEY` y `GEMINI_MODEL` (con `.env.example`).
+- [x] Diseño de prompts estructurados en `src/doclayout/llm/prompts.py`:
   - Inyección de bloques con sus IDs y límites de longitud de caracteres/tokens.
   - Instrucción estricta para evitar desbordamientos tipográficos en el idioma destino.
   - Tratamiento del contenido del documento como *untrusted input*.
-- [ ] Respuestas estructuradas (Structured Outputs / JSON Schema) mapeando salidas directamente a cada `block_id`.
-- [ ] Implementación de cliente simulado (`MockGeminiClient` en `tests/mocks/`) para pruebas sin costo de cuota.
-- [ ] Reintentos exponenciales con *jitter* ante errores de tasa (`429`) y cuota (`RESOURCE_EXHAUSTED`).
+- [x] Respuestas estructuradas (Structured Outputs / JSON Schema) mapeando salidas directamente a cada `block_id`.
+- [x] Implementación de cliente simulado (`MockGeminiClient` en `tests/mocks/`) para pruebas sin costo de cuota.
+- [x] Reintentos exponenciales con *jitter* ante errores de tasa (`429`) y cuota (`RESOURCE_EXHAUSTED`).
 
 ---
 
@@ -231,3 +231,4 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | 23/10/2026 | **Fase 0** | Antigravity AI / Joan Roa | Repositorio vinculado a remoto, especificación técnica en `project.md` y creación del cronograma `stages.md`. |
 | 23/10/2026 | **Feature 1** | Antigravity AI / Joan Roa | Rama `Feature1EntornoYScaffolding`: entorno `.venv`, cachés locales, modelos Pydantic, configuración de tooling y tests unitarios. |
 | 23/10/2026 | **Feature 2** | Antigravity AI / Joan Roa | Rama `Feature2IngestaYParsingLayout`: motores `PDFLayoutExtractor` y `DocxLayoutExtractor`, soporte de tablas, validaciones y tests unitarios. |
+| 24/10/2026 | **Feature 3** | Antigravity AI / Joan Roa | Rama `Feature3IntegracionGeminiIA`: `GeminiClient` con `google-genai`, prompts anti-inyección, Structured Outputs, backoff con jitter y `MockGeminiClient`. |
