@@ -22,7 +22,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | **Feature 2** | `Feature2IngestaYParsingLayout` | Motor de parsing y extracción de Bounding Boxes (PDF/DOCX) | `[x] Completado` |
 | **Feature 3** | `Feature3IntegracionGeminiIA` | Cliente `google-genai`, esquemas estructurados y mock testing | `[x] Completado` |
 | **Feature 4** | `Feature4MotorReconstruccionYFitting` | Algoritmo de text-fitting adaptativo y renderizado de salida | `[x] Completado` |
-| **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[ ] Pendiente` |
+| **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[x] Completado` |
 | **Feature 6** | `Feature6InterfazStreamlitComparativa` | UI con vista lado a lado, capas de bounding boxes e historial | `[ ] Pendiente` |
 | **Feature 7** | `Feature7PipelineCICDSeguridad` | GitHub Actions (validación de ramas, tests con mocks, SAST, Trivy) | `[ ] Pendiente` |
 | **Feature 8** | `Feature8ArquitecturaAsincronaK8s` | Desacoplamiento (API + Workers + Cola), manifests K8s y HPA | `[ ] Pendiente` |
@@ -112,13 +112,13 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 **Rama**: `Feature5MotorVerificacionFidelidad`  
 **Objetivo**: Medir cuantitativamente la fidelidad geométrica y visual entre el documento original y el reconstruido.
 
-- [ ] Implementación de métricas de calidad en `src/doclayout/verification/metrics.py`:
+- [x] Implementación de métricas de calidad en `src/doclayout/verification/metrics.py`:
   - Cálculo de **IoU (Intersection over Union)** para cajas delimitadoras de texto.
   - Detección de colisiones o solapamientos entre bloques de texto e imágenes.
   - Detección de truncamientos y textos fuera de los márgenes imprimibles.
-- [ ] Implementación de comparación visual SSIM (Structural Similarity Index) en elementos gráficos/fondos.
-- [ ] Generador de reporte de calidad en formato JSON y resumen estructurado de incidentes visuales.
-- [ ] Pruebas automatizadas en `tests/unit/test_verification.py`.
+- [x] Implementación de comparación visual SSIM (Structural Similarity Index) en elementos gráficos/fondos.
+- [x] Generador de reporte de calidad en formato JSON y resumen estructurado de incidentes visuales.
+- [x] Pruebas automatizadas en `tests/unit/test_verification.py`.
 
 ---
 
@@ -233,3 +233,4 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | 23/10/2026 | **Feature 2** | Antigravity AI / Joan Roa | Rama `Feature2IngestaYParsingLayout`: motores `PDFLayoutExtractor` y `DocxLayoutExtractor`, soporte de tablas, validaciones y tests unitarios. |
 | 24/10/2026 | **Feature 3** | Antigravity AI / Joan Roa | Rama `Feature3IntegracionGeminiIA`: `GeminiClient` con `google-genai`, prompts anti-inyección, Structured Outputs, backoff con jitter y `MockGeminiClient`. |
 | 25/10/2026 | **Feature 4** | Antigravity AI / Joan Roa | Rama `Feature4MotorReconstruccionYFitting`: `AdaptiveTextFitter`, `PDFDocumentBuilder` (overlay + standalone), `DocxDocumentBuilder` y tests unitarios. |
+| 26/10/2026 | **Feature 5** | Antigravity AI / Joan Roa | Rama `Feature5MotorVerificacionFidelidad`: motor `LayoutQualityVerifier` (IoU, colisiones, márgenes, SSIM estático, semáforo y exportación JSON) y tests unitarios. |
