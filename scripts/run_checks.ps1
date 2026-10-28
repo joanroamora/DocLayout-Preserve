@@ -6,6 +6,7 @@ $ErrorActionPreference = "Stop"
 
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $ProjectRoot
+$env:PYTHONUTF8 = "1"
 
 $VenvPython = "$ProjectRoot\.venv\Scripts\python.exe"
 if (-not (Test-Path $VenvPython)) {
