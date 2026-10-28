@@ -23,7 +23,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | **Feature 3** | `Feature3IntegracionGeminiIA` | Cliente `google-genai`, esquemas estructurados y mock testing | `[x] Completado` |
 | **Feature 4** | `Feature4MotorReconstruccionYFitting` | Algoritmo de text-fitting adaptativo y renderizado de salida | `[x] Completado` |
 | **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[x] Completado` |
-| **Feature 6** | `Feature6InterfazStreamlitComparativa` | UI con vista lado a lado, capas de bounding boxes e historial | `[ ] Pendiente` |
+| **Feature 6** | `Feature6InterfazStreamlitComparativa` | UI con vista lado a lado, capas de bounding boxes e historial | `[x] Completado` |
 | **Feature 7** | `Feature7PipelineCICDSeguridad` | GitHub Actions (validación de ramas, tests con mocks, SAST, Trivy) | `[ ] Pendiente` |
 | **Feature 8** | `Feature8ArquitecturaAsincronaK8s` | Desacoplamiento (API + Workers + Cola), manifests K8s y HPA | `[ ] Pendiente` |
 | **Feature 9** | `Feature9InfraestructuraTerraform` | Módulos Terraform, backend remoto con locking y multi-entorno | `[ ] Pendiente` |
@@ -126,7 +126,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 **Rama**: `Feature6InterfazStreamlitComparativa`  
 **Objetivo**: Proporcionar una pantalla interactiva completa para inspección, comparación y descargas.
 
-- [ ] Implementación de la aplicación en `src/doclayout/ui/app.py`:
+- [x] Implementación de la aplicación en `src/doclayout/ui/app.py`:
   - Carga y validación de documentos (PDF / DOCX).
   - Configuración de transformación (idioma destino, estilo, instrucciones de diseño).
   - Visualizador comparativo lado a lado (*Side-by-Side*): documento original vs documento reconstruido.
@@ -134,8 +134,8 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
   - Panel de métricas de calidad visual (semáforo de desbordamientos, IoU promedio).
   - Descarga de archivos resultantes (`.pdf`, `.docx`, `.json`).
   - Historial de trabajos de la sesión y acciones «Vaciar historial» y «Limpiar toda la sesión».
-- [ ] Ejecución local restringida a `127.0.0.1:8501`.
-- [ ] Manejo visual amigable de errores de API o documentos ilegibles.
+- [x] Ejecución local restringida a `127.0.0.1:8501`.
+- [x] Manejo visual amigable de errores de API o documentos ilegibles.
 
 ---
 
@@ -234,3 +234,4 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | 24/10/2026 | **Feature 3** | Antigravity AI / Joan Roa | Rama `Feature3IntegracionGeminiIA`: `GeminiClient` con `google-genai`, prompts anti-inyección, Structured Outputs, backoff con jitter y `MockGeminiClient`. |
 | 25/10/2026 | **Feature 4** | Antigravity AI / Joan Roa | Rama `Feature4MotorReconstruccionYFitting`: `AdaptiveTextFitter`, `PDFDocumentBuilder` (overlay + standalone), `DocxDocumentBuilder` y tests unitarios. |
 | 26/10/2026 | **Feature 5** | Antigravity AI / Joan Roa | Rama `Feature5MotorVerificacionFidelidad`: motor `LayoutQualityVerifier` (IoU, colisiones, márgenes, SSIM estático, semáforo y exportación JSON) y tests unitarios. |
+| 26/10/2026 | **Feature 6** | Antigravity AI / Joan Roa | Rama `Feature6InterfazStreamlitComparativa`: app Streamlit en español, visor Side-by-Side con capas Bounding Boxes, semáforo de calidad, historial y tests `AppTest`. |

@@ -36,6 +36,19 @@ Copy-Item .env.example .env
 # Edita .env con tu GEMINI_API_KEY
 ```
 
+### Arranque de la Interfaz Interactiva (Streamlit en `127.0.0.1:8501`)
+
+```powershell
+.\scripts\run_ui.ps1
+```
+
+O directamente con el intérprete de `.venv`:
+
+```powershell
+$env:PYTHONPATH = "src"
+.\.venv\Scripts\python.exe -m streamlit run src\doclayout\ui\app.py --server.address 127.0.0.1 --server.port 8501
+```
+
 ### Ejecución de Validaciones de Calidad y Pruebas
 
 ```powershell
