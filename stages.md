@@ -24,7 +24,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | **Feature 4** | `Feature4MotorReconstruccionYFitting` | Algoritmo de text-fitting adaptativo y renderizado de salida | `[x] Completado` |
 | **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[x] Completado` |
 | **Feature 6** | `Feature6InterfazStreamlitComparativa` | UI con vista lado a lado, capas de bounding boxes e historial | `[x] Completado` |
-| **Feature 7** | `Feature7PipelineCICDSeguridad` | GitHub Actions (validación de ramas, tests con mocks, SAST, Trivy) | `[ ] Pendiente` |
+| **Feature 7** | `Feature7PipelineCICDSeguridad` | GitHub Actions (validación de ramas, tests con mocks, SAST, Trivy) | `[x] Completado` |
 | **Feature 8** | `Feature8ArquitecturaAsincronaK8s` | Desacoplamiento (API + Workers + Cola), manifests K8s y HPA | `[ ] Pendiente` |
 | **Feature 9** | `Feature9InfraestructuraTerraform` | Módulos Terraform, backend remoto con locking y multi-entorno | `[ ] Pendiente` |
 | **Feature 10** | `Feature10ObservabilidadGrafanaRunbooks` | Dashboards Grafana, métricas Prometheus, OTel y Runbooks | `[ ] Pendiente` |
@@ -143,13 +143,13 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 **Rama**: `Feature7PipelineCICDSeguridad`  
 **Objetivo**: Automatizar la validación de código, pruebas, seguridad e integridad del repositorio.
 
-- [ ] Workflow de validación de ramas: comprueba que las ramas sigan la nomenclatura `Feature<Número><NombreDelDesarrollo>`.
-- [ ] Workflow `ci-validation.yml`:
+- [x] Workflow de validación de ramas: comprueba que las ramas sigan la nomenclatura `Feature<Número><NombreDelDesarrollo>`.
+- [x] Workflow `ci-validation.yml`:
   - Instalación reproducible en runner efímero.
   - Linters y formato: `black`, `isort`, `flake8`, `ruff`.
   - Tipado estático con `mypy`.
   - Ejecución de pruebas unitarias e integración con mocks de Gemini (cero consumo de cuota).
-- [ ] Workflow `ci-security.yml`:
+- [x] Workflow `ci-security.yml`:
   - SAST (análisis estático de seguridad).
   - SCA: auditoría de dependencias conocidas con `pip-audit`.
   - Secret scanning con Gitleaks para prevenir filtración de credenciales.
@@ -235,3 +235,4 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | 25/10/2026 | **Feature 4** | Antigravity AI / Joan Roa | Rama `Feature4MotorReconstruccionYFitting`: `AdaptiveTextFitter`, `PDFDocumentBuilder` (overlay + standalone), `DocxDocumentBuilder` y tests unitarios. |
 | 26/10/2026 | **Feature 5** | Antigravity AI / Joan Roa | Rama `Feature5MotorVerificacionFidelidad`: motor `LayoutQualityVerifier` (IoU, colisiones, márgenes, SSIM estático, semáforo y exportación JSON) y tests unitarios. |
 | 26/10/2026 | **Feature 6** | Antigravity AI / Joan Roa | Rama `Feature6InterfazStreamlitComparativa`: app Streamlit en español, visor Side-by-Side con capas Bounding Boxes, semáforo de calidad, historial y tests `AppTest`. |
+| 28/10/2026 | **Feature 7** | Antigravity AI / Joan Roa | Rama `Feature7PipelineCICDSeguridad`: `ci-validation.yml`, `ci-security.yml` (SHA pinning, Bandit, pip-audit, Gitleaks, Trivy), `Dockerfile` non-root y validador de ramas. |

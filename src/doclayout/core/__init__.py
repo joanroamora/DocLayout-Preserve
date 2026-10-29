@@ -1,6 +1,7 @@
-"""Core domain models and settings."""
+"""Core domain models, governance validators, and settings."""
 
 from doclayout.core.config import Settings, get_settings
+from doclayout.core.governance import FEATURE_BRANCH_PATTERN, validate_feature_branch_name
 from doclayout.core.models import (
     BlockType,
     BoundingBox,
@@ -18,6 +19,7 @@ __all__ = [
     "BlockType",
     "BoundingBox",
     "DocumentLayout",
+    "FEATURE_BRANCH_PATTERN",
     "LayoutBlock",
     "PageLayout",
     "QualityReport",
@@ -27,4 +29,5 @@ __all__ = [
     "TransformationResult",
     "TransformationStatus",
     "get_settings",
+    "validate_feature_branch_name",
 ]
