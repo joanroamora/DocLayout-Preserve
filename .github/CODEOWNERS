@@ -1,0 +1,8 @@
+# Revision obligatoria para workflows, infraestructura, Kubernetes y politicas de seguridad
+/.github/                @joanroamora
+/infra/                  @joanroamora
+/k8s/                    @joanroamora
+/monitoring/             @joanroamora
+/Dockerfile              @joanroamora
+/SECURITY_POLICY.md      @joanroamora
+/project.md              @joanroamora

@@ -1,0 +1,19 @@
+title = "DocLayout-Preserve Gitleaks Configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Safe template placeholders and offline unit test fixtures"
+paths = [
+  '''^\.env\.example$''',
+  '''^tests/''',
+]
+regexes = [
+  '''tu_clave_de_gemini_aqui''',
+  '''test-secret-key-12345''',
+  '''MY_SUPER_SECRET_KEY_999''',
+  '''valid-secret-key-xyz''',
+  '''secret-12345678''',
+  '''secret-key-abc''',
+]
