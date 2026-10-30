@@ -25,7 +25,7 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | **Feature 5** | `Feature5MotorVerificacionFidelidad` | Engine de calidad visual (IoU, colisiones, SSIM y reportes JSON) | `[x] Completado` |
 | **Feature 6** | `Feature6InterfazStreamlitComparativa` | UI con vista lado a lado, capas de bounding boxes e historial | `[x] Completado` |
 | **Feature 7** | `Feature7PipelineCICDSeguridad` | GitHub Actions (validación de ramas, tests con mocks, SAST, Trivy) | `[x] Completado` |
-| **Feature 8** | `Feature8ArquitecturaAsincronaK8s` | Desacoplamiento (API + Workers + Cola), manifests K8s y HPA | `[ ] Pendiente` |
+| **Feature 8** | `Feature8ArquitecturaAsincronaK8s` | Desacoplamiento (API + Workers + Cola), manifests K8s y HPA | `[x] Completado` |
 | **Feature 9** | `Feature9InfraestructuraTerraform` | Módulos Terraform, backend remoto con locking y multi-entorno | `[ ] Pendiente` |
 | **Feature 10** | `Feature10ObservabilidadGrafanaRunbooks` | Dashboards Grafana, métricas Prometheus, OTel y Runbooks | `[ ] Pendiente` |
 | **Feature 11** | `Feature11PipelinePromocionYRollback` | CD con firma Cosign, SBOM, smoke tests y sincronización de `dev` | `[ ] Pendiente` |
@@ -161,10 +161,10 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 **Rama**: `Feature8ArquitecturaAsincronaK8s`  
 **Objetivo**: Desacoplar la aplicación en API, Workers y Cola para escalamiento horizontal en Kubernetes.
 
-- [ ] API REST en `src/doclayout/api/main.py` (FastAPI) para recepción de documentos y consulta de trabajos asíncronos.
-- [ ] Worker asíncrono en `src/doclayout/api/worker.py` consumiendo tareas desde cola (Redis / RabbitMQ).
-- [ ] Idempotencia en trabajos y persistencia de estado con TTL y cifrado en almacenamiento de objetos (S3/MinIO).
-- [ ] Manifiestos base y overlays en `k8s/`:
+- [x] API REST en `src/doclayout/api/main.py` (FastAPI) para recepción de documentos y consulta de trabajos asíncronos.
+- [x] Worker asíncrono en `src/doclayout/api/worker.py` consumiendo tareas desde cola (Redis / RabbitMQ).
+- [x] Idempotencia en trabajos y persistencia de estado con TTL y cifrado en almacenamiento de objetos (S3/MinIO).
+- [x] Manifiestos base y overlays en `k8s/`:
   - Deployments separados para UI, API Gateway y Processing Workers.
   - Configuración de `HPA (Horizontal Pod Autoscaler)` basado en profundidad de cola y uso de CPU/RAM.
   - Probes configuradas: `startupProbe`, `readinessProbe` y `livenessProbe`.
@@ -236,3 +236,4 @@ Cada fase se desarrolla obligatoriamente bajo una rama dedicada siguiendo la con
 | 26/10/2026 | **Feature 5** | Antigravity AI / Joan Roa | Rama `Feature5MotorVerificacionFidelidad`: motor `LayoutQualityVerifier` (IoU, colisiones, márgenes, SSIM estático, semáforo y exportación JSON) y tests unitarios. |
 | 26/10/2026 | **Feature 6** | Antigravity AI / Joan Roa | Rama `Feature6InterfazStreamlitComparativa`: app Streamlit en español, visor Side-by-Side con capas Bounding Boxes, semáforo de calidad, historial y tests `AppTest`. |
 | 28/10/2026 | **Feature 7** | Antigravity AI / Joan Roa | Rama `Feature7PipelineCICDSeguridad`: `ci-validation.yml`, `ci-security.yml` (SHA pinning, Bandit, pip-audit, Gitleaks, Trivy), `Dockerfile` non-root y validador de ramas. |
+| 30/10/2026 | **Feature 8** | Antigravity AI / Joan Roa | Rama `Feature8ArquitecturaAsincronaK8s`: API FastAPI asíncrona, Worker con checkpoints y rate-limiting, almacenamiento cifrado Fernet con TTL, y manifiestos K8s (Deployments, HPA, PDB, NetworkPolicies deny-all). |

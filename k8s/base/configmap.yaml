@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: doclayout-config
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/part-of: DocLayout-Preserve
+data:
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"
+  GEMINI_MODEL: "gemini-2.5-flash"
+  GEMINI_MAX_RPM: "30"
+  APP_HOST: "0.0.0.0"
+  APP_PORT: "8501"
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  WORKER_HEALTH_PORT: "8081"
+  REDIS_URL: "redis://doclayout-redis.doclayout-preserve.svc.cluster.local:6379/0"
+  ARTIFACT_STORE_DIR: "/tmp/artifacts"
+  ARTIFACT_TTL_SECONDS: "3600"
+  MAX_CONCURRENT_JOBS_PER_SESSION: "5"
+  MAX_FILE_SIZE_MB: "20"
+  MAX_PAGES: "50"
+  MIN_FONT_SCALE_RATIO: "0.75"
+  TMPDIR: "/tmp"
+  HOME: "/tmp"

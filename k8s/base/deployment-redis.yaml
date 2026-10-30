@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doclayout-redis
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/name: doclayout-redis
+    app.kubernetes.io/component: queue
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: doclayout-redis
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: doclayout-redis
+        app.kubernetes.io/component: queue
+        app.kubernetes.io/part-of: DocLayout-Preserve
+    spec:
+      serviceAccountName: doclayout-redis-sa
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: redis
+          image: redis:7.4.2-alpine
+          imagePullPolicy: IfNotPresent
+          command:
+            - redis-server
+            - --save
+            - ""
+            - --appendonly
+            - "no"
+            - --dir
+            - /tmp
+          ports:
+            - name: tcp-redis
+              containerPort: 6379
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: redis-tmp
+              mountPath: /tmp
+          startupProbe:
+            tcpSocket:
+              port: tcp-redis
+            initialDelaySeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          readinessProbe:
+            tcpSocket:
+              port: tcp-redis
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: tcp-redis
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 3
+      volumes:
+        - name: redis-tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 256Mi

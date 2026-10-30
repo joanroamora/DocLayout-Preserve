@@ -7,6 +7,7 @@ useDefault = true
 description = "Safe template placeholders and offline unit test fixtures"
 paths = [
   '''^\.env\.example$''',
+  '''^k8s/base/secret\.example\.yaml$''',
   '''^tests/''',
 ]
 regexes = [

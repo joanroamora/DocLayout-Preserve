@@ -1,0 +1,50 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: doclayout-preserve
+
+resources:
+  - ../../base
+
+labels:
+  - pairs:
+      environment: validation
+
+replicas:
+  - name: doclayout-ui
+    count: 1
+  - name: doclayout-api
+    count: 1
+  - name: doclayout-worker
+    count: 1
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: doclayout-config
+    patch: |-
+      - op: replace
+        path: /data/ENVIRONMENT
+        value: "validation"
+      - op: replace
+        path: /data/GEMINI_MAX_RPM
+        value: "10"
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: doclayout-worker-hpa
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 1
+      - op: replace
+        path: /spec/maxReplicas
+        value: 3
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: doclayout-api-hpa
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 1
+      - op: replace
+        path: /spec/maxReplicas
+        value: 2

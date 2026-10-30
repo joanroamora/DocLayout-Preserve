@@ -1,0 +1,41 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: doclayout-ui-pdb
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/component: ui
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: doclayout-ui
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: doclayout-api-pdb
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: doclayout-api
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: doclayout-worker-pdb
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/component: worker
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: doclayout-worker
