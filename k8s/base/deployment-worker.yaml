@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doclayout-worker
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/name: doclayout-worker
+    app.kubernetes.io/component: worker
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: doclayout-worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: doclayout-worker
+        app.kubernetes.io/component: worker
+        app.kubernetes.io/part-of: DocLayout-Preserve
+    spec:
+      serviceAccountName: doclayout-worker-sa
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: worker
+          image: us-central1-docker.pkg.dev/bitcitychamp-project/doclayout-preserve/doclayout-app:0.1.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - python
+            - -m
+            - doclayout.api.worker
+          ports:
+            - name: http-probe
+              containerPort: 8081
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: doclayout-config
+            - secretRef:
+                name: doclayout-secrets
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2000m"
+              memory: "1536Mi"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: tmp-volume
+              mountPath: /tmp
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http-probe
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            failureThreshold: 12
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http-probe
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http-probe
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes:
+        - name: tmp-volume
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi

@@ -1,0 +1,84 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: doclayout-worker-hpa
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/component: worker
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: doclayout-worker
+  minReplicas: 2
+  maxReplicas: 8
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 30
+      policies:
+        - type: Pods
+          value: 2
+          periodSeconds: 60
+    scaleDown:
+      stabilizationWindowSeconds: 180
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 60
+  metrics:
+    - type: External
+      external:
+        metric:
+          name: doclayout_queue_depth
+        target:
+          type: AverageValue
+          averageValue: "5"
+    - type: External
+      external:
+        metric:
+          name: doclayout_queue_oldest_age_seconds
+        target:
+          type: Value
+          value: "30"
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: doclayout-api-hpa
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: doclayout-api
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80

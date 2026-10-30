@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: doclayout-ui
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/name: doclayout-ui
+    app.kubernetes.io/component: ui
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: doclayout-ui
+  ports:
+    - name: http-ui
+      port: 8501
+      targetPort: http-ui
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: doclayout-api
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/name: doclayout-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: doclayout-api
+  ports:
+    - name: http-api
+      port: 8000
+      targetPort: http-api
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: doclayout-redis
+  namespace: doclayout-preserve
+  labels:
+    app.kubernetes.io/name: doclayout-redis
+    app.kubernetes.io/component: queue
+    app.kubernetes.io/part-of: DocLayout-Preserve
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: doclayout-redis
+  ports:
+    - name: tcp-redis
+      port: 6379
+      targetPort: tcp-redis
+      protocol: TCP

@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     # Gemini Developer API
     GEMINI_API_KEY: SecretStr = Field(default=SecretStr(""))
     GEMINI_MODEL: str = Field(default="gemini-2.5-flash")
+    GEMINI_MAX_RPM: int = Field(default=30, ge=1, le=6000)
 
     # Google Cloud Platform (GCP)
     GCP_PROJECT_ID: str = Field(default="")
@@ -30,8 +31,18 @@ class Settings(BaseSettings):
     # Local Runtime & Server Settings
     APP_HOST: str = Field(default="127.0.0.1")
     APP_PORT: int = Field(default=8501, ge=1024, le=65535)
+    API_HOST: str = Field(default="127.0.0.1")
+    API_PORT: int = Field(default=8000, ge=1024, le=65535)
+    WORKER_HEALTH_PORT: int = Field(default=8081, ge=1024, le=65535)
     ENVIRONMENT: str = Field(default="local")
     LOG_LEVEL: str = Field(default="INFO")
+
+    # Async Queue & Encrypted TTL Artifact Storage
+    REDIS_URL: str = Field(default="")
+    ARTIFACT_STORE_DIR: str = Field(default=".tmp/artifacts")
+    ARTIFACT_TTL_SECONDS: int = Field(default=3600, ge=60, le=604800)
+    ARTIFACT_ENCRYPTION_SECRET: SecretStr = Field(default=SecretStr(""))
+    MAX_CONCURRENT_JOBS_PER_SESSION: int = Field(default=5, ge=1, le=100)
 
     # Document Limits & Text-Fitting Thresholds
     MAX_FILE_SIZE_MB: int = Field(default=20, ge=1, le=100)
